@@ -1,0 +1,25 @@
+@import '../../ScssVariables.module.scss';
+.todo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 2px solid #F1F1F1;
+    // .todo__checkbox{
+    //     width: 24px;
+    //     height: 24px;
+    // }
+    .todo__name{
+        @extend %todo;
+        color: #333333;
+    }
+    .todo__name_completed{
+        @extend %todo;
+        color: #777777;
+        text-decoration: line-through;
+    }
+    &:last-child{
+        border-bottom: none;
+    }
+}

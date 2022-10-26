@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
+import { Authorization } from './components/Authorization/Authorization';
+import { MainContent } from './components/MainContent/MainContent';
 
 function App() {
   return (
     <div className="App">
-      <h1>HELLO</h1>
+      <MainContent />
+      {/* <Authorization /> */}
     </div>
   );
 }

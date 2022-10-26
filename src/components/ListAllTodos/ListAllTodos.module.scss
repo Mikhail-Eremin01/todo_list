@@ -1,0 +1,31 @@
+@import '../../ScssVariables.module.scss';
+
+.listAllTodosContainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+    .listAllTodos__title{
+        font-size: 28px;
+        font-weight: 400;
+        color: #444444;
+        margin-bottom: 30px;
+    }
+    .listAllTodos_menuSelectTodoCondition{
+        .listAllTodos_ul{
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 30px;
+            .listAllTodos_ul__li{
+                color: #999999;
+                margin-right: 30px;
+                &:hover{
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+                &:last-child{
+                    margin-right: 0px;
+                }
+            }
+        }
+    }
+}

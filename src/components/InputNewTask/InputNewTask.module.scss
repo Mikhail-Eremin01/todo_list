@@ -1,0 +1,35 @@
+.inputNewTask{
+    width: 480px;
+    height: 80px;
+    background-color: #F1F1F1;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    .inputNewTask__input{
+        background-color: #F1F1F1;
+        border-radius: 20px;
+        width: 320px;
+        height: 100%;
+        font-size: 16px;
+        color: #999999;
+        padding: 20px 30px;
+    }
+    .inputNewTask__btn{
+        width: 100px;
+        height: 60px;
+        background: #4165FF;
+        font-size: 18px;
+        margin-right: 10px;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        &:hover{
+            cursor:pointer;
+        }
+    }
+}

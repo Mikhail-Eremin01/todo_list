@@ -1,0 +1,45 @@
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 0;
+    .inputEditTask{
+        max-width: 420px;
+        height: 56px;
+        background-color: #F1F1F1;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 20px;
+        .inputEditTask__input{
+            background-color: #F1F1F1;
+            border-radius: 20px;
+            width: 100%;
+            height: 100%;
+            font-weight: 600;
+            letter-spacing: 1px;
+            font-size: 18px;
+            padding: 20px 30px;
+        }
+        .inputEditTask__btn{
+            width: 76px;
+            height: 36px;
+            background: #4165FF;
+            font-size: 18px;
+            margin-right: 10px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            &:hover{
+                cursor:pointer;
+            }
+        }
+    }
+}
+.form_invisible{
+    display: none;
+}

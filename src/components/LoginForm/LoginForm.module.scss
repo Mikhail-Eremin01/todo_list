@@ -1,0 +1,22 @@
+@import "../../ScssVariables.module.scss";
+
+.logForm{
+    .logFormEmail{
+        margin-bottom: 20px;
+    }
+    .label{
+        @extend %label;
+        & span {
+            @extend %titleInLabel;
+        }
+        .input{
+            @extend %input;
+            &:hover{
+                border: 2px solid #CCCCCC;
+            }
+        }
+    }
+    .submitInput{
+        @extend %submitInput;
+    }
+}

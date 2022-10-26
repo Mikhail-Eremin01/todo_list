@@ -1,0 +1,33 @@
+.writeFirstTodo{
+    display: flex;
+    flex: 1 1 auto;
+    margin: 35px 0;
+    justify-content: center;
+    align-items: center;
+    .writeFirstTodo_imageContainer{
+        width: 470px;
+        height: 400px;
+        background: rgba(99, 103, 233, 0.2);
+        border-radius: 20px;
+        margin-right: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .writeFirstTodo_text{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 32px;
+        font-weight: 200;
+        .writeFirstTodo_text__title{
+            color: #666666;
+            margin-bottom: 20px;
+        }
+        .writeFirstTodo_text__subtitle{
+            color: #333333;
+            margin-bottom: 50px;
+        }
+    }
+}

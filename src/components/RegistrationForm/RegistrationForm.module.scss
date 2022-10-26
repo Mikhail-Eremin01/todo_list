@@ -1,0 +1,19 @@
+@import "../../ScssVariables.module.scss";
+
+.regForm{
+    .regForm{
+        margin-bottom: 20px;
+    }
+    .label{
+        @extend %label;
+        & span {
+            @extend %titleInLabel;
+        }
+        .input{
+            @extend %input;
+        }
+    }
+    .submitInput{
+        @extend %submitInput;
+    }
+}

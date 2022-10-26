@@ -1,0 +1,9 @@
+.listAllTodos{
+    border: 2px solid #F1F1F1;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+    max-height: 360px;
+    overflow-y: scroll;
+}

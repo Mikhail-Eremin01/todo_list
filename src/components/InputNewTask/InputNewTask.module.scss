@@ -8,14 +8,21 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 20px;
+    @media screen and (max-width: 1000px){
+        height: 60px;
+        width: 320px;
+        border-radius: 16px;
+    }
     .inputNewTask__input{
         background-color: #F1F1F1;
         border-radius: 20px;
-        width: 320px;
         height: 100%;
+        width: 70%;
         font-size: 16px;
-        color: #999999;
         padding: 20px 30px;
+        &::placeholder{
+            color: #999999;
+        }
     }
     .inputNewTask__btn{
         width: 100px;
@@ -30,6 +37,12 @@
         color: #fff;
         &:hover{
             cursor:pointer;
+        }
+        @media screen and (max-width: 1000px){
+            height: 40px;
+            width: 70px;
+            border-radius: 16px;
+            font-size: 16px;
         }
     }
 }

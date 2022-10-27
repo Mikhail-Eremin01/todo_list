@@ -17,7 +17,7 @@ function InputEditTask() {
             display: conditionInput ? 'flex' : 'none'
         }}>
             <div className={styles.inputEditTask}>
-                <input className={styles.inputEditTask__input} />
+                <input placeholder='Edit your task' className={styles.inputEditTask__input} />
                 <input type='submit' className={styles.inputEditTask__btn} value = {'Save'}></input>
             </div>
         </form>

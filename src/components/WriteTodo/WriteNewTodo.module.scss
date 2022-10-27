@@ -1,7 +1,6 @@
 .writeTodo{
     display: flex;
     margin: 35px 0;
-    // justify-content: center;
     flex-direction: column;
     align-items: center;
     .writeTodo_imageContainer{
@@ -24,6 +23,7 @@
         .writeTodo_text__title{
             color: #666666;
             margin-bottom: 20px;
+            font-weight: 400;
         }
         .writeTodo_text__subtitle{
             color: #333333;

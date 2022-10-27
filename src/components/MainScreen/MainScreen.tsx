@@ -6,12 +6,11 @@ import { ListAllTodos } from '../ListAllTodos/ListAllTodos';
 function MainScreen() {
   return (
     <div className={styles.mainScreen}>
-        <div className={styles.mainScreen_container}>
-            <WriteNewTodo />
-            <div className={styles.verticalLine}></div>
-            <ListAllTodos />
-            {/* <div className={styles.verticalLine}></div> */}
-        </div>
+      <div className={styles.mainScreen_container}>
+        <WriteNewTodo />
+        <div className={styles.verticalLine}></div>
+        <ListAllTodos />
+      </div>
     </div>
   )
 }

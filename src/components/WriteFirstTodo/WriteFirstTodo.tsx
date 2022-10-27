@@ -10,7 +10,7 @@ function WriteFirstTodo() {
                 <Image
                     src = 'writingNotes.svg'
                     alt = {'Oops'}
-                    className = {'login_imageContainer__image'}
+                    className = {'writeFirstTodo_imageContainer__image'}
                     width = {300}
                     height = {300}
                 />

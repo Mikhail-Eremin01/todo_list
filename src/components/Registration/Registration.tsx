@@ -12,8 +12,8 @@ function Registration() {
           src = 'padlock.svg'
           alt = {'Oops'}
           className = {'regist_imageContainer__image'}
-          width = {340}
-          height = {340}
+          width = {300}
+          height = {300}
         />
       </div>
       <div className={styles.formsContainer}>

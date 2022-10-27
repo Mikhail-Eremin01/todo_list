@@ -12,7 +12,8 @@ function MainContent() {
   return (
     <div className={styles.mainContent}>
       <Header button = {true} />
-      <MainScreen />
+      {/* <MainScreen /> */}
+      <WriteFirstTodo />
       <Footer />
     </div>
   )

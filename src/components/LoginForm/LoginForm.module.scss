@@ -3,6 +3,14 @@
 .logForm{
     .logFormEmail{
         margin-bottom: 20px;
+        @media screen and (max-width: 750px){
+            margin-bottom: 16px;
+        }
+    }
+    .logFormPass{
+        @media screen and (max-width: 750px){
+            margin-bottom: 16px;
+        }
     }
     .label{
         @extend %label;

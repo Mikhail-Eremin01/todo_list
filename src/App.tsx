@@ -6,8 +6,8 @@ import { MainContent } from './components/MainContent/MainContent';
 function App() {
   return (
     <div className="App">
-      <MainContent />
-      {/* <Authorization /> */}
+      {/* <MainContent /> */}
+      <Authorization />
     </div>
   );
 }

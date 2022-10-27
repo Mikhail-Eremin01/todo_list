@@ -5,15 +5,32 @@
     height: 100%;
     justify-content: center;
     .mainScreen_container{
-        width: 80%;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        // align-items: center;
+        margin: 0 40px;
+        @media screen and (min-height: 950px){
+            align-items: center;
+        }
+        @media screen and (max-width: 830px){
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin: 0px;
+        }
     }
     .verticalLine{
         height: 100%;
-        border: 2px solid #F5F5F5;
+        border-right: 2px solid #F5F5F5;
         margin: 0 90px;
+        @media screen and (max-width: 1100px){
+            margin: 0 30px;
+        }
+        @media screen and (max-width: 830px){
+            margin: 0px;
+            width: 100%;
+            border-right:none;
+            border-bottom: 2px solid #F5F5F5;
+        }
     }
 }

@@ -6,13 +6,14 @@
     align-items: center;
     padding: 25px 30px;
     border-bottom: 2px solid #F1F1F1;
-    &:last-child{
-        border-bottom: none;
-    }
-    // .todo__checkbox{
-    //     width: 24px;
-    //     height: 24px;
+    // &:last-child{
+    //     border-bottom: none;
     // }
+    .todo__checkbox{
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
     .todo__name{
         @extend %todo;
         color: #333333;
@@ -23,3 +24,6 @@
         text-decoration: line-through;
     }
 }
+// .oneTodo{
+//     border-style: solid;
+// }

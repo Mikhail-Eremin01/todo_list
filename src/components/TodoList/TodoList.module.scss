@@ -3,11 +3,11 @@
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    min-height: 150px;
+    // min-height: 250px;
     max-height: 360px;
     min-width: 360px;
     max-width: 480px;
-    overflow-y: scroll;
+    overflow: auto; 
     @media screen and (max-width: 600px){
         max-width: none;
         border: none;

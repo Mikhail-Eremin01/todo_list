@@ -1,8 +1,18 @@
 import React from 'react';
 import { Image } from '../Image/Image';
 import styles from './BtnExitProfile.module.scss';
+import { useAppDispatch, useAppSelector } from '../../hook';
+import { fetchLogout } from '../../store/authorizationSlice';
+import userEvent from '@testing-library/user-event';
 
 function BtnExitProfile() {
+  const dispatch = useAppDispatch();
+
+  const logout = () => dispatch(fetchLogout());
+
+  const user = useAppSelector(state => state.authorization.user);
+  console.log(user);
+
   return (
     <div className = {styles.userLogOut}>
       <div className={styles.header_exitProfile}>
@@ -15,10 +25,10 @@ function BtnExitProfile() {
             height = {20}
           />
         </div>
-        <p className={styles.header_exitProfile__name}>Jessica Solares</p>
+        <p className={styles.header_exitProfile__name}>{user.name}</p>
         <i className={styles.arrowDown}></i>
       </div>
-      <div className = {styles.dropDownChild}>
+      <div onClick={logout} className = {styles.dropDownChild}>
         <div className = {styles.dropDownChild_itemContainer}>
           <Image
             src = 'logout.svg'

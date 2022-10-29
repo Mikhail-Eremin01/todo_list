@@ -4,17 +4,26 @@ import styles from './DropDownMenu.module.scss';
 import { Image } from '../Image/Image';
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { showInput } from '../../store/showInputEditTaskSlice';
+import { fetchDeleteTask } from '../../store/tasksSlice';
 
-function DropDownMenu() {
+interface IDropDownMenu{
+    id: string;
+}
+function DropDownMenu({id}: IDropDownMenu) {
     const dispatch = useAppDispatch();
-    const handler = () => {
-        dispatch(showInput());
+
+    const editTodo = () => {
+        console.log(id);
+        dispatch(showInput(id));
+    }
+    const deleteTodo = () => {
+        dispatch(fetchDeleteTask(id));
     }
     return (
         <div className={styles.dropDown}>
             <BsThreeDotsVertical className={styles.dropDown__threeDots}/>
             <div className = {styles.dropDownChild}>
-                <div className = {styles.dropDownChild_itemContainer} onClick = {handler}>
+                <div className = {styles.dropDownChild_itemContainer} onClick = {editTodo}>
                     <Image
                         src = 'edit.svg'
                         alt = {'Oops'}
@@ -24,7 +33,7 @@ function DropDownMenu() {
                     />
                     <span>Edit</span>
                 </div>
-                <div className = {styles.dropDownChild_itemContainer}>
+                <div className = {styles.dropDownChild_itemContainer} onClick = {deleteTodo}>
                     <Image
                         src = 'trash.svg'
                         alt = {'Oops'}

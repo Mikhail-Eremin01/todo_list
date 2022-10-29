@@ -1,24 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './TodoList.module.scss';
 import { Todo } from '../Todo/Todo';
 import { InputEditTask } from '../InputEditTask/InputEditTask';
+import { useAppSelector } from '../../hook';
 
-interface Todo{
-  id: string,
-  name: string,
-  completed: boolean,
+interface ITodoList {
+  filter?: boolean
 }
-interface ITodoList{
-  todos: Todo[];
-}
-
-function TodoList({todos}:ITodoList) {
+function TodoList({filter}:ITodoList) {
+  const tasks = useAppSelector(state => state.tasks.tasks);
+  console.log(typeof filter);
+  const arrayOfTasks = typeof filter === 'boolean' ? 
+  tasks.filter((elem) => elem.completed === filter) : 
+  tasks;
+  console.log(arrayOfTasks);
 
   return (
     <div className = {styles.listAllTodos}>
       <InputEditTask />
-      {todos.map(elem => {
-        return <Todo key = {elem.id} name = {elem.name} completed = {elem.completed} />
+      {arrayOfTasks.map(elem => {
+        return <Todo arrayLength = {arrayOfTasks.length} key = {elem._id} id = {elem._id} name = {elem.name} completed = {elem.completed} />
       })}
     </div>
   )

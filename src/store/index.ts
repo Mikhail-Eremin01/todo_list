@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import showInputEditTaskReducer from "./showInputEditTaskSlice";
+import authorizationReducer from "./authorizationSlice";
+import tasksReducer from './tasksSlice';
 
 
 const store = configureStore({
     reducer: {
         showInputEditTask: showInputEditTaskReducer,
+        authorization: authorizationReducer,
+        tasks: tasksReducer,
     },
 });
 export default store;

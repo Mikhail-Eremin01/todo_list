@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const conditionInput:boolean = false;
+interface IConditionInput{
+    showInput: boolean;
+    todosId: string;
+}
+const conditionInput:IConditionInput = {
+    showInput: false,
+    todosId: ''
+};
 
 const showInputEditTask = createSlice({
     name: 'showInputEditTask',
@@ -8,11 +15,13 @@ const showInputEditTask = createSlice({
         conditionInput,
     },
     reducers: {
-       showInput(state) {
-        state.conditionInput = true;
+       showInput(state, action) {
+        state.conditionInput.showInput = true;
+        state.conditionInput.todosId = action.payload;
        },
        hideInput(state) {
-        state.conditionInput = false;
+        state.conditionInput.showInput = false;
+        state.conditionInput.todosId = '';
        }
        
     }

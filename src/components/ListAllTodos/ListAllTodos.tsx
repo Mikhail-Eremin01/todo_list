@@ -1,17 +1,14 @@
 import React from 'react';
 import styles from './ListAllTodos.module.scss';
-import { Image } from '../Image/Image';
 import { TodoList } from '../TodoList/TodoList';
 import { CustomLink } from '../CustomLink/CustomLink';
-import { Todo } from '../Todo/Todo';
-import { NavLink, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '../../hook';
 
 
 function ListAllTodos() {
-    const activeTasks = useAppSelector(state => state.tasks.active);
+    let activeTasks = useAppSelector(state => state.tasks.active);
     const completedTasks = useAppSelector(state => state.tasks.completed);
-
     return (
         <div className={styles.listAllTodosContainer}>
             <p className = {styles.listAllTodos__title}>

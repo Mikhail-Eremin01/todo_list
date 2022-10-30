@@ -1,9 +1,4 @@
 import { createSlice, createAsyncThunk, SerializedError } from "@reduxjs/toolkit";
-import { IUser } from "../models/IUser";
-import {login, registration, logout} from "../services/AuthService";
-import axios from "axios";
-import {AuthResponse} from '../models/response/AuthResponse';
-import { API_URL } from "../http";
 
 type ITask = {
     _id: string,
@@ -17,7 +12,6 @@ interface IInitialState{
     completed: number
     error: null | string | SerializedError,
 }
-
 const initialState:IInitialState = {
     tasks: [],
     active: 0,
@@ -28,6 +22,10 @@ const initialState:IInitialState = {
 interface MyKnownError {
     message: string,
     status: number
+}
+interface IUpdateTask {
+    id: string;
+    name: string
 }
 
 export const fetchGetAllTasks = createAsyncThunk<ITask[], undefined, {rejectValue: MyKnownError}>(
@@ -67,15 +65,12 @@ export const fetchCreateTask = createAsyncThunk<ITask[], string, {rejectValue: M
     }
 );
 
-interface IUpdateTask {
-    id: string;
-    name: string
-}
+
 export const fetchUpdateTask = createAsyncThunk<ITask[], IUpdateTask, {rejectValue: MyKnownError}>(
     'tasks/fetchUpdateTask',
     async function(task, {rejectWithValue}){
         const {id, name} = task;
-        const body = {
+        const body:IUpdateTask = {
             id,
             name
         }
@@ -98,15 +93,11 @@ export const fetchUpdateTask = createAsyncThunk<ITask[], IUpdateTask, {rejectVal
 export const fetchDeleteTask = createAsyncThunk<ITask[], string, {rejectValue: MyKnownError}>(
     'tasks/fetchDeleteTask',
     async function(id, {rejectWithValue}){
-        const body = {
-            id
-        }
-        const response = await fetch('/api/tasks', {
+        const response = await fetch(`/api/tasks/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
+            }
         });
         const data = await response.json();
 
@@ -120,7 +111,7 @@ export const fetchDeleteTask = createAsyncThunk<ITask[], string, {rejectValue: M
 export const fetchTasksCondition = createAsyncThunk<ITask[], string, {rejectValue: MyKnownError}>(
     'tasks/fetchTasksCondition',
     async function(id, {rejectWithValue}){
-        const body = {
+        const body:{id:string} = {
             id
         }
         const response = await fetch('/api/tasksCondition', {
@@ -143,9 +134,7 @@ export const fetchTasksCondition = createAsyncThunk<ITask[], string, {rejectValu
 const tasks = createSlice({
     name: 'user',
     initialState,
-    reducers: {
-       
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
         .addCase(fetchGetAllTasks.pending, (state) => {
@@ -154,9 +143,8 @@ const tasks = createSlice({
         })
         .addCase(fetchGetAllTasks.fulfilled, (state, action) => {
             state.tasks = [...action.payload];
-
-            state.active = action.payload.filter(elem => elem.completed == false).length;
-            state.completed = action.payload.filter(elem => elem.completed == true).length;
+            state.active = action.payload.filter(elem => elem.completed === false).length;
+            state.completed = action.payload.filter(elem => elem.completed === true).length;
             state.loading = false;
         })
 
@@ -167,8 +155,8 @@ const tasks = createSlice({
         })
         .addCase(fetchCreateTask.fulfilled, (state, action) => {
             state.tasks = [...action.payload];
-            state.active = action.payload.filter(elem => elem.completed == false).length;
-            state.completed = action.payload.filter(elem => elem.completed == true).length;
+            state.active = action.payload.filter(elem => elem.completed === false).length;
+            state.completed = action.payload.filter(elem => elem.completed === true).length;
             state.loading = false;
         })
 
@@ -179,8 +167,8 @@ const tasks = createSlice({
         })
         .addCase(fetchUpdateTask.fulfilled, (state, action) => {
             state.tasks = [...action.payload];
-            state.active = action.payload.filter(elem => elem.completed == false).length;
-            state.completed = action.payload.filter(elem => elem.completed == true).length;
+            state.active = action.payload.filter(elem => elem.completed === false).length;
+            state.completed = action.payload.filter(elem => elem.completed === true).length;
             state.loading = false;
         })
 
@@ -191,8 +179,8 @@ const tasks = createSlice({
         })
         .addCase(fetchDeleteTask.fulfilled, (state, action) => {
             state.tasks = [...action.payload];
-            state.active = action.payload.filter(elem => elem.completed == false).length;
-            state.completed = action.payload.filter(elem => elem.completed == true).length;
+            state.active = action.payload.filter(elem => elem.completed === false).length;
+            state.completed = action.payload.filter(elem => elem.completed === true).length;
             state.loading = false;
         })
 
@@ -203,8 +191,8 @@ const tasks = createSlice({
         })
         .addCase(fetchTasksCondition.fulfilled, (state, action) => {
             state.tasks = [...action.payload];
-            state.active = action.payload.filter(elem => elem.completed == false).length;
-            state.completed = action.payload.filter(elem => elem.completed == true).length;
+            state.active = action.payload.filter(elem => elem.completed === false).length;
+            state.completed = action.payload.filter(elem => elem.completed === true).length;
             state.loading = false;
         })
     }

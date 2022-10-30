@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Image } from '../Image/Image';
 import styles from './Login.module.scss';
 import { LoginForm } from '../LoginForm/LoginForm';
@@ -19,7 +19,11 @@ function Login() {
       <div className={styles.formsContainer}>
         <p className={styles.formsContainer__title}>Sign In</p>
         <LoginForm />
-        <span>Don't have an account? <Link to = {'/registration'}><span className={styles.link_changeForm}>Sign Up</span></Link></span>
+        <span>Don't have an account? 
+          <Link to = {'/registration'}>
+            <span className={styles.link_changeForm}>Sign Up</span>
+          </Link>
+        </span>
       </div>
     </div>
   )

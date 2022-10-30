@@ -10,7 +10,7 @@ interface IInitialState{
     user: IUser;
     isAuth: boolean,
     loading: boolean,
-    error: null | string | SerializedError,
+    error: null | SerializedError,
 }
 const initialState:IInitialState = {
     user: {} as IUser,
@@ -26,14 +26,34 @@ interface IUsersInfo {
 interface MyKnownError {
     message: string,
     status: number
-  }
+}
+interface IRespUser {
+    id: string;
+    name: string;
+    email: string;
+}
 
-export const fetchLogin = createAsyncThunk<any, IUsersInfo, {rejectValue: MyKnownError}>(
+export const fetchLogin = createAsyncThunk<IRespUser, IUsersInfo, {rejectValue: MyKnownError}>(
     'user/fetchLogin',
-    async function(usersInfo, {rejectWithValue}){
+    async function(usersInfo:IUsersInfo, {rejectWithValue}){
         const {email, password} = usersInfo
         const response = await login(email, password)
-        console.log(response);
+        if(response.status === 400) {
+            console.log(rejectWithValue(response as unknown as MyKnownError))
+            return rejectWithValue(response as unknown as MyKnownError)
+        }
+        localStorage.setItem('token', response.data.accessToken)
+        console.log(response.data.user)
+        return response.data.user;
+    }
+);
+
+export const fetchRegistration = createAsyncThunk<IRespUser, IUsersInfo, {rejectValue: MyKnownError}>(
+    'user/fetchRegistration',
+    async function(usersInfo:IUsersInfo, {rejectWithValue}){
+        const {name, email, password} = usersInfo
+        const response = await registration(name, email, password)
+        console.log(response)
         if(response.status === 400) {
             console.log(rejectWithValue(response as unknown as MyKnownError))
             return rejectWithValue(response as unknown as MyKnownError)
@@ -43,25 +63,11 @@ export const fetchLogin = createAsyncThunk<any, IUsersInfo, {rejectValue: MyKnow
     }
 );
 
-export const fetchRegistration = createAsyncThunk(
-    'user/fetchRegistration',
-    async function(usersInfo:IUsersInfo, {rejectWithValue}){
-        try{
-            const {name, email, password} = usersInfo
-            const response = await registration(name, email, password)
-            localStorage.setItem('token', response.data.accessToken)
-            return response.data.user;
-        } catch(err) {
-            return rejectWithValue((err as Error).message)
-        }
-    }
-);
-
-export const fetchLogout = createAsyncThunk(
+export const fetchLogout = createAsyncThunk<IUser, undefined, {rejectValue: string}>(
     'user/fetchLogout',
     async function(_, {rejectWithValue}) {
         try{
-            await logout()
+            await logout();
             localStorage.removeItem('token')
             return {} as IUser;
         } catch(err) {
@@ -70,11 +76,12 @@ export const fetchLogout = createAsyncThunk(
     }
 );
 
-export const fetchCheckAuth = createAsyncThunk(
+export const fetchCheckAuth = createAsyncThunk<IRespUser, undefined, {rejectValue: string}>(
     'user/fetchCheckAuth',
     async function(_, {rejectWithValue}){
         try{
             const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {withCredentials: true});
+            console.log(response);
             localStorage.setItem('token', response.data.accessToken)
             return response.data.user;
         } catch(err) {
@@ -86,9 +93,7 @@ export const fetchCheckAuth = createAsyncThunk(
 const loginUser = createSlice({
     name: 'user',
     initialState,
-    reducers: {
-       
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
         .addCase(fetchLogin.pending, (state) => {
@@ -97,19 +102,16 @@ const loginUser = createSlice({
         })
         .addCase(fetchLogin.fulfilled, (state, action) => {
             state.isAuth = true;
-            console.log(action.payload)
             state.user = action.payload;
             state.loading = false;
         })
         .addCase(fetchLogin.rejected, (state, action) => {
             if (action.payload) {
-                console.log(1)
-                console.log(action.payload)
               state.error = action.payload
-              console.log(state.error)
+              state.loading = false;
             } else {
-                console.log(action.error.code)
               state.error = action.error
+              state.loading = false;
             }
         })
         
@@ -120,7 +122,6 @@ const loginUser = createSlice({
         })
         .addCase(fetchLogout.fulfilled, (state, action) => {
             state.isAuth = false;
-            console.log(action.payload)
             state.user = action.payload;
             state.loading = false;
         })
@@ -132,9 +133,17 @@ const loginUser = createSlice({
         })
         .addCase(fetchRegistration.fulfilled, (state, action) => {
             state.isAuth = true;
-            console.log(action.payload)
             state.user = action.payload;
             state.loading = false;
+        })
+        .addCase(fetchRegistration.rejected, (state, action) => {
+            if (action.payload) {
+              state.error = action.payload
+              state.loading = false;
+            } else {
+              state.error = action.error
+              state.loading = false;
+            }
         })
 
         builder
@@ -144,7 +153,7 @@ const loginUser = createSlice({
         })
         .addCase(fetchCheckAuth.fulfilled, (state, action) => {
             state.isAuth = true;
-            console.log(action.payload)
+            console.log('check')
             state.user = action.payload;
             state.loading = false;
         })

@@ -3,7 +3,7 @@
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    // min-height: 250px;
+    min-height: 150px;
     max-height: 360px;
     min-width: 360px;
     max-width: 480px;
@@ -13,6 +13,12 @@
         border: none;
         border-bottom: 2px solid #F1F1F1;
         border-top: 2px solid #F1F1F1;
+        justify-content: space-between;
+    }
+    @media screen and (max-width: 900px){
         border-radius: 0px;
+    }
+    @media screen and (min-width: 600px){
+        min-width: 465px;
     }
 }

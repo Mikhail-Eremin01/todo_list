@@ -2,7 +2,7 @@ import React from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import styles from './DropDownMenu.module.scss';
 import { Image } from '../Image/Image';
-import { useAppDispatch, useAppSelector } from "../../hook";
+import { useAppDispatch } from "../../hook";
 import { showInput } from '../../store/showInputEditTaskSlice';
 import { fetchDeleteTask } from '../../store/tasksSlice';
 
@@ -13,7 +13,6 @@ function DropDownMenu({id}: IDropDownMenu) {
     const dispatch = useAppDispatch();
 
     const editTodo = () => {
-        console.log(id);
         dispatch(showInput(id));
     }
     const deleteTodo = () => {

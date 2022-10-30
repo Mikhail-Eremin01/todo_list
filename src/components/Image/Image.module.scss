@@ -5,7 +5,7 @@
     }
 }
 
-@media screen and (max-width: 1080px){
+@media screen and (max-width: 1080px), (max-height: 850px){
     .regist_imageContainer__image, .login_imageContainer__image{
         height: 150px;
         width: 150px;

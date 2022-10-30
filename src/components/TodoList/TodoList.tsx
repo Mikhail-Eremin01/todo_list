@@ -9,11 +9,9 @@ interface ITodoList {
 }
 function TodoList({filter}:ITodoList) {
   const tasks = useAppSelector(state => state.tasks.tasks);
-  console.log(typeof filter);
   const arrayOfTasks = typeof filter === 'boolean' ? 
   tasks.filter((elem) => elem.completed === filter) : 
   tasks;
-  console.log(arrayOfTasks);
 
   return (
     <div className = {styles.listAllTodos}>

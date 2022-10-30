@@ -6,12 +6,17 @@
     align-items: center;
     padding: 25px 30px;
     border-bottom: 2px solid #F1F1F1;
-    // &:last-child{
-    //     border-bottom: none;
-    // }
+    @media screen and (max-width: 1250px){
+        max-width: 300px;
+    }
+    @media screen and (max-width: 1250px){
+        max-width: none;
+    }
     .todo__checkbox{
         width: 24px;
         height: 24px;
+        min-width: 24px;
+        min-height: 24px;
         cursor: pointer;
     }
     .todo__name{

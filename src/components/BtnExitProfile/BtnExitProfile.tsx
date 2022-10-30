@@ -3,15 +3,14 @@ import { Image } from '../Image/Image';
 import styles from './BtnExitProfile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../hook';
 import { fetchLogout } from '../../store/authorizationSlice';
-import userEvent from '@testing-library/user-event';
+import { Link } from 'react-router-dom';
 
 function BtnExitProfile() {
   const dispatch = useAppDispatch();
-
-  const logout = () => dispatch(fetchLogout());
-
   const user = useAppSelector(state => state.authorization.user);
-  console.log(user);
+  const logout = () => {
+    dispatch(fetchLogout());
+  }
 
   return (
     <div className = {styles.userLogOut}>
@@ -37,7 +36,9 @@ function BtnExitProfile() {
             width = {20}
             height = {20}
           />
-          <span>Log out</span>
+          <span>
+            <Link style={{color: '#fff'}} to = {'/'}>Log out</Link>
+          </span>
         </div>
       </div>
     </div>

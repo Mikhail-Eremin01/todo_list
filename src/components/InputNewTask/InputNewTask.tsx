@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styles from './InputNewTask.module.scss';
-import { useAppDispatch } from '../../hook';
+import { useAppDispatch, useAppSelector } from '../../hook';
 import { fetchCreateTask } from '../../store/tasksSlice';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -9,7 +9,7 @@ type FormValues = {
 };
 
 function InputNewTask() {
-
+    const usersId = useAppSelector(state => state.authorization.user.id);
     const {
         register,
         formState: {
@@ -31,7 +31,7 @@ function InputNewTask() {
 
     const createTask: SubmitHandler<FormValues> = (e) => {
         reset();
-        dispatch(fetchCreateTask(name))
+        dispatch(fetchCreateTask({name, usersId}))
     }
 
     return (

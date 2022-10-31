@@ -7,16 +7,16 @@ import { MainScreen } from '../MainScreen/MainScreen';
 import { useAppSelector, useAppDispatch } from '../../hook';
 import { fetchGetAllTasks } from '../../store/tasksSlice';
 import { Loading } from '../Loading/Loading';
-// import { changeLoading } from '../../store/authorizationSlice';
 
 
 function MainContent() {
   const tasks = useAppSelector(state => state.tasks.tasks);
+  const usersId = useAppSelector(state => state.authorization.user.id);
   const dispatch = useAppDispatch();
   const [stat, setState] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchGetAllTasks())
+    dispatch(fetchGetAllTasks(usersId))
     .then(() => {
       setState(true);
     })

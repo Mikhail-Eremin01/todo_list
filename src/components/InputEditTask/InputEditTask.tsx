@@ -10,6 +10,8 @@ type FormValues = {
 };
 
 function InputEditTask() {
+    const usersId = useAppSelector(state => state.authorization.user.id);
+
     const {
         register,
         formState: {
@@ -33,7 +35,7 @@ function InputEditTask() {
     }
 
     const editTask: SubmitHandler<FormValues> = (e) => {
-        dispatch(fetchUpdateTask({id: todosId, name: inputsValue}));
+        dispatch(fetchUpdateTask({id: todosId, name: inputsValue, usersId}));
         dispatch(hideInput());
         reset();
     }

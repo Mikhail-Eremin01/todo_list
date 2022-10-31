@@ -2,7 +2,7 @@ import React from 'react';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import styles from './DropDownMenu.module.scss';
 import { Image } from '../Image/Image';
-import { useAppDispatch } from "../../hook";
+import { useAppDispatch, useAppSelector } from "../../hook";
 import { showInput } from '../../store/showInputEditTaskSlice';
 import { fetchDeleteTask } from '../../store/tasksSlice';
 
@@ -10,13 +10,15 @@ interface IDropDownMenu{
     id: string;
 }
 function DropDownMenu({id}: IDropDownMenu) {
+    const usersId = useAppSelector(state => state.authorization.user.id);
+
     const dispatch = useAppDispatch();
 
     const editTodo = () => {
         dispatch(showInput(id));
     }
     const deleteTodo = () => {
-        dispatch(fetchDeleteTask(id));
+        dispatch(fetchDeleteTask({id, usersId}));
     }
     return (
         <div className={styles.dropDown}>

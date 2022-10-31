@@ -4,7 +4,7 @@ import { Image } from '../Image/Image';
 import classNames from 'classnames';
 import { DropDownMenu } from '../DropDownMenu/DropDownMenu';
 import { fetchTasksCondition } from '../../store/tasksSlice';
-import { useAppDispatch } from '../../hook';
+import { useAppDispatch, useAppSelector } from '../../hook';
 
 
 interface ITodo{
@@ -16,11 +16,12 @@ interface ITodo{
 }
 
 function Todo({name, completed, id, arrayLength}:ITodo) {
+    const usersId = useAppSelector(state => state.authorization.user.id);
     const dispatch = useAppDispatch();
     const [todoCompleted, setTodoCompleted] = useState(completed);
     const changeTodo = () => {
         setTodoCompleted(!todoCompleted);
-        dispatch(fetchTasksCondition(id));
+        dispatch(fetchTasksCondition({id, usersId}));
     }
 
     return (

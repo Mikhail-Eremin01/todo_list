@@ -25,13 +25,18 @@ interface MyKnownError {
 }
 interface IUpdateTask {
     id: string;
-    name: string
+    name: string;
+    usersId: string;
+}
+interface transmittedInfo{
+    id: string;
+    usersId: string;
 }
 
-export const fetchGetAllTasks = createAsyncThunk<ITask[], undefined, {rejectValue: MyKnownError}>(
+export const fetchGetAllTasks = createAsyncThunk<ITask[], string, {rejectValue: MyKnownError}>(
     'tasks/fetchgetAllTasks',
-    async function(_, {rejectWithValue}){
-        const response = await fetch('api/tasks')
+    async function(usersId, {rejectWithValue}){
+        const response = await fetch(`api/tasks/${usersId}`)
         const data = await response.json();
 
         if(response.status === 400) {
@@ -42,11 +47,13 @@ export const fetchGetAllTasks = createAsyncThunk<ITask[], undefined, {rejectValu
     }
 );
 
-export const fetchCreateTask = createAsyncThunk<ITask[], string, {rejectValue: MyKnownError}>(
+export const fetchCreateTask = createAsyncThunk<ITask[], {name: string, usersId: string}, {rejectValue: MyKnownError}>(
     'tasks/fetchCreateTask',
-    async function(name, {rejectWithValue}){
+    async function(usersInfo, {rejectWithValue}){
+        const {name, usersId} = usersInfo
         const body = {
-            name
+            name,
+            usersId
         }
         const response = await fetch('/api/tasks', {
             method: 'POST',
@@ -69,10 +76,11 @@ export const fetchCreateTask = createAsyncThunk<ITask[], string, {rejectValue: M
 export const fetchUpdateTask = createAsyncThunk<ITask[], IUpdateTask, {rejectValue: MyKnownError}>(
     'tasks/fetchUpdateTask',
     async function(task, {rejectWithValue}){
-        const {id, name} = task;
+        const {id, name, usersId} = task;
         const body:IUpdateTask = {
             id,
-            name
+            name,
+            usersId
         }
         const response = await fetch('/api/tasks', {
             method: 'PUT',
@@ -90,14 +98,20 @@ export const fetchUpdateTask = createAsyncThunk<ITask[], IUpdateTask, {rejectVal
         return data;
     }
 );
-export const fetchDeleteTask = createAsyncThunk<ITask[], string, {rejectValue: MyKnownError}>(
+export const fetchDeleteTask = createAsyncThunk<ITask[], transmittedInfo, {rejectValue: MyKnownError}>(
     'tasks/fetchDeleteTask',
-    async function(id, {rejectWithValue}){
-        const response = await fetch(`/api/tasks/${id}`, {
+    async function(info, {rejectWithValue}){
+        const {id, usersId} = info;
+        const body: transmittedInfo = {
+            id,
+            usersId
+        }
+        const response = await fetch(`/api/tasks`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            body: JSON.stringify(body)
         });
         const data = await response.json();
 
@@ -108,11 +122,13 @@ export const fetchDeleteTask = createAsyncThunk<ITask[], string, {rejectValue: M
         return data;
     }
 );
-export const fetchTasksCondition = createAsyncThunk<ITask[], string, {rejectValue: MyKnownError}>(
+export const fetchTasksCondition = createAsyncThunk<ITask[], transmittedInfo, {rejectValue: MyKnownError}>(
     'tasks/fetchTasksCondition',
-    async function(id, {rejectWithValue}){
-        const body:{id:string} = {
-            id
+    async function(info, {rejectWithValue}){
+        const {id, usersId} = info;
+        const body: transmittedInfo = {
+            id,
+            usersId
         }
         const response = await fetch('/api/tasksCondition', {
             method: 'PUT',

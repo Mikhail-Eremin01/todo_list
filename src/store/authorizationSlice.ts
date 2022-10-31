@@ -43,7 +43,6 @@ export const fetchLogin = createAsyncThunk<IRespUser, IUsersInfo, {rejectValue: 
             return rejectWithValue(response as unknown as MyKnownError)
         }
         localStorage.setItem('token', response.data.accessToken)
-        console.log(response.data.user)
         return response.data.user;
     }
 );
@@ -153,7 +152,6 @@ const loginUser = createSlice({
         })
         .addCase(fetchCheckAuth.fulfilled, (state, action) => {
             state.isAuth = true;
-            console.log('check')
             state.user = action.payload;
             state.loading = false;
         })
